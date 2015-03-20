@@ -1,5 +1,3 @@
-package simpleThreadPool;
-
 class SimpleTesting implements ISimpleTask{
     private int i;
     public SimpleTesting(int i){

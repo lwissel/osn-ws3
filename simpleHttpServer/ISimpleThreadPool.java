@@ -1,4 +1,3 @@
-package simpleThreadPool;
 
 /*
  *   @author Behzad_Bordbar & Yi_Chen

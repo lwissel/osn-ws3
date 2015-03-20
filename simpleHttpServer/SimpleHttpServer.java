@@ -20,6 +20,10 @@ public class SimpleHttpServer {
 	 */
 	public void start() {
 		ServerSocket serverSocket;
+     
+      // initialize our thread pool
+      SimpleThreadPool pool = new SimpleThreadPool();
+      pool.start();
 
 		// Create serverSocket listening on port
 		try {
@@ -34,6 +38,7 @@ public class SimpleHttpServer {
 				Socket remote = serverSocket.accept();
 				SimpleHttpHandler handler = new SimpleHttpHandler(this.rootDirectory);
 				handler.handle(remote);
+            pool.addTask(handler);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

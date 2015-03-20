@@ -1,5 +1,3 @@
-package simpleThreadPool;
-
 import java.util.concurrent.LinkedBlockingQueue;
 /*
  *   @author   Lennart Wissel
@@ -40,7 +38,8 @@ public class SimpleThreadPool {
       for(int i = 0; i < this.workerThreads.length; i++) {
          SimplePoolThread spThread = new SimplePoolThread(taskQueue, i);
          workerThreads[i] = new Thread(spThread);
-         System.out.println(spThread.getName() + " started");
+         // optional logging
+         // System.out.println(spThread.getName() + " started");
          workerThreads[i].start();
       }
    }
@@ -60,7 +59,9 @@ public class SimpleThreadPool {
       }
       for (Thread workerThread : workerThreads) {
          workerThread.interrupt();
-         System.out.println(workerThread.getName() + " has been interrupted");
+
+         // optional logging
+         // System.out.println(workerThread.getName() + " has been interrupted");
       }
    }
 	

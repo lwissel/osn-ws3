@@ -5,31 +5,20 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
 
-public class SimpleHttpHandler {
-	
+public class SimpleHttpHandler implements ISimpleTask {
+   private Socket remote;	
 	private String rootDirectory;
 
 	public SimpleHttpHandler(String rootDirectory) {
 		this.rootDirectory = rootDirectory;
 	}
-	
-	/**
-	 * After you accepted a connection in SimpleHttpServer, you have a socket leading to the client (remote).
-	 * Your server communicates with the client through the socket.
-	 * 
-	 * Tasks:
-	 * #1. Read request message from buffered reader object (You may do it in other ways).
-	 * #2. Parse the request and get the request file name.
-	 * #3. Check if the file exists or not by requestFile()  (You may do it in other ways).
-	 * #4. If the file exists, then you need to create a response message according to assignment
-	 *     description, and put the content to the message body.
-	 * #5. If the file does not exist, then you create a error message according to assignment description.
-	 * #6. Send response message to client by PrintStream object (You may do it in other ways).
-	 * 
-	 */
-	public void handle(Socket remote) {
 
+   @Override
+   public void run() {
 		try {
+         // optional logging
+         // System.out.println("Thread: " + Thread.currentThread().getId());
+
 			// Create in and out streams
 			BufferedReader in = new BufferedReader(new InputStreamReader(remote.getInputStream()));
 			PrintStream out = new PrintStream(remote.getOutputStream());
@@ -64,6 +53,24 @@ public class SimpleHttpHandler {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+   }
+	
+	/**
+	 * After you accepted a connection in SimpleHttpServer, you have a socket leading to the client (remote).
+	 * Your server communicates with the client through the socket.
+	 * 
+	 * Tasks:
+	 * #1. Read request message from buffered reader object (You may do it in other ways).
+	 * #2. Parse the request and get the request file name.
+	 * #3. Check if the file exists or not by requestFile()  (You may do it in other ways).
+	 * #4. If the file exists, then you need to create a response message according to assignment
+	 *     description, and put the content to the message body.
+	 * #5. If the file does not exist, then you create a error message according to assignment description.
+	 * #6. Send response message to client by PrintStream object (You may do it in other ways).
+	 * 
+	 */
+	public void handle(Socket remote) {
+      this.remote = remote;
 	}
 	
 	/**

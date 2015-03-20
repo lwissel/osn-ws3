@@ -3,7 +3,6 @@
  * @author Lennart Wissel
  * @version 15.02.2015
  */
-package simpleThreadPool;
 
 import java.util.concurrent.*;
 
